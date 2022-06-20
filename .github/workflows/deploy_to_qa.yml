@@ -27,7 +27,7 @@ jobs:
         run: yarn lint
 
       - name: Building the project
-        if: github.event_name == 'push'
+        # if: github.event_name == 'push'
         env:
           VUE_APP_NAME: ${{ secrets.VUE_APP_NAME }}
         run: yarn build
