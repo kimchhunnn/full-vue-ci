@@ -6,7 +6,7 @@ on:
       - dev-test-action
   pull_request:
     branches:
-      - dev-test-action
+      - dev-test-action-1
     types: [opened, ready_for_reivew, review_requested]
 
 jobs:
