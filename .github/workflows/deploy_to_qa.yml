@@ -29,8 +29,9 @@ jobs:
           VUE_APP_NAME: ${{ secrets.VUE_APP_NAME }}
         run: yarn build
       
-      if: github.event_name == 'push'
-      - uses: actions/upload-artifact@v3
-        if: github.event_name == 'push'
+      - name: Upload artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v3
+        # if: github.ref == 'refs/heads/dev-test-action'
         with:
           path: dist
