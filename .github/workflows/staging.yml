@@ -13,7 +13,8 @@ on:
       - review_requested
 
 jobs:
-  build-qa:
+  staging_deploy:
+    if: github.event_name == 'push' # merged
     runs-on: ubuntu-latest
     environment: staging
     steps:
@@ -27,13 +28,24 @@ jobs:
         run: yarn lint
 
       - name: Building the project
-        if: github.event_name == 'push'
         env:
           VUE_APP_NAME: ${{ secrets.VUE_APP_NAME }}
         run: yarn build
       
       - name: Upload artifact
-        if: github.event_name == 'push'
         uses: actions/upload-artifact@v3
         with:
           path: dist
+  
+  staging_pull_request:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@master
+
+      - name: Installing project dependencies
+        run: yarn install
+
+      - name: Code linting
+        run: yarn lint
