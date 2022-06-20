@@ -27,6 +27,9 @@ jobs:
       - name: Code linting
         run: yarn lint
 
+      # - name: Code testing
+      #   run: <test-command>
+
       - name: Building the project
         env:
           VUE_APP_NAME: ${{ secrets.VUE_APP_NAME }}
@@ -36,6 +39,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           path: dist
+
+      # - name: Deployment
+      #   run: <run-deployment-logic>
   
   staging_pull_request:
     if: github.event_name == 'pull_request'
