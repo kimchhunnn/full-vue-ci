@@ -4,7 +4,13 @@ on:
   push:
     branches:
       - dev-test-action
-      - develop
+  pull_request:
+    branches:
+      - dev-test-action
+    types:
+      - opened
+      - ready_for_reivew
+      - review_requested
 
 jobs:
   build-qa:
@@ -24,6 +30,6 @@ jobs:
         run: yarn build
       
       - uses: actions/upload-artifact@v3
-        if: github.ref == 'refs/heads/dev-test-action'
+        if: github.event_name == 'push'
         with:
           path: dist
