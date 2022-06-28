@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - run: echo "${{github.repository}}"
+      - run: echo "${{github.event.repository.name}}"
 
       - uses: actions/setup-node@master
 
