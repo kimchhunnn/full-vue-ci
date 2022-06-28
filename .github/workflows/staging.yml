@@ -19,8 +19,9 @@ jobs:
     environment: staging
     steps:
       - uses: actions/checkout@master
-        run: echo ${{github.repository}
-        
+
+      - run: echo ${{github.repository}
+
       - uses: actions/setup-node@master
 
       - name: Installing project dependencies
